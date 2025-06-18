@@ -1,0 +1,70 @@
+import example.*
+
+describe "group of tests for viajes" {
+
+  const primerViajeCiudad = new ExcursionCiudad(idiomas = #{}, cantidadAtracciones = 4)
+  const primerViajeTropical = new ExcursionesCiudadTropical(idiomas = #{}, cantidadAtracciones = 4)
+  const segundoViajeCiudad = new ExcursionCiudad(idiomas = #{}, cantidadAtracciones = 8)
+  const segundoViajeTropical = new ExcursionesCiudadTropical(idiomas = #{}, cantidadAtracciones = 8)
+  const tercerViajeTropical = new ExcursionesCiudadTropical(idiomas = #{}, cantidadAtracciones = 10)
+
+  const primerSalidaTrekking = new SalidaTrekking(idiomas = #{}, kmRecorribles = 100, diasDeSol = 130)
+  const segundaSalidaTrekking = new SalidaTrekking(idiomas = #{}, kmRecorribles = 50, diasDeSol = 240)
+  const tercerSalidaTrekking = new SalidaTrekking(idiomas = #{}, kmRecorribles = 250, diasDeSol = 130)
+
+  const tercerViajeCiudad = new ExcursionCiudad(idiomas = #{}, cantidadAtracciones = 5)
+  const cuartaSalidaTrekking = new SalidaTrekking(idiomas = #{"inles", "español", "chino"}, kmRecorribles = 250, diasDeSol = 150)
+
+  test "primerViaje lleva 2 dias, no implica esfuerzo y no sirve para broncearse" {
+    assert.notThat(primerViajeCiudad.implicaEsfuerzo())
+    assert.notThat(primerViajeCiudad.sirveParaBroncearse())
+    assert.equals(2, primerViajeCiudad.diasLleva())
+  }
+  test "primerViajeTropical lleva 3 dias, no implica esfuerzo y sirve para broncearse" {
+    assert.notThat(primerViajeTropical.implicaEsfuerzo())
+    assert.that(primerViajeTropical.sirveParaBroncearse())
+    assert.equals(3, primerViajeTropical.diasLleva())
+  }
+
+  test "segundoViajeCiudad lleva 4 dias, implica esfuerzo y no sirve para broncearse" {
+    assert.that(segundoViajeCiudad.implicaEsfuerzo())
+    assert.notThat(segundoViajeCiudad.sirveParaBroncearse())
+    assert.equals(4, segundoViajeCiudad.diasLleva())
+  }
+
+  test "segundoViajeTropical lleva 5 dias, implica esfuerzo y sirve para broncearse" {
+    assert.that(segundoViajeTropical.implicaEsfuerzo())
+    assert.that(segundoViajeTropical.sirveParaBroncearse())
+    assert.equals(5, segundoViajeTropical.diasLleva())
+  }
+
+  test "tercerViajeTropical lleva 6 dias, no implica esfuerzo y sirve para broncearse" {
+    assert.notThat(tercerViajeTropical.implicaEsfuerzo())
+    assert.that(tercerViajeTropical.sirveParaBroncearse())
+    assert.equals(6, tercerViajeTropical.diasLleva())
+  }
+  test "primerSalidaTrekking lleva 2 dias, implica esfuerzo y no sirve para broncearse" {
+    assert.that(primerSalidaTrekking.implicaEsfuerzo())
+    assert.notThat(primerSalidaTrekking.sirveParaBroncearse())
+    assert.equals(2, primerSalidaTrekking.diasLleva())
+  }
+  test "segundaSalidaTrekking lleva 1 dias, no implica esfuerzo y sirve para broncearse" {
+    assert.notThat(segundaSalidaTrekking.implicaEsfuerzo())
+    assert.that(segundaSalidaTrekking.sirveParaBroncearse())
+    assert.equals(1, segundaSalidaTrekking.diasLleva())
+  }
+  test "tercerSalidaTrekking lleva 1 dias, no implica esfuerzo y sirve para broncearse" {
+    assert.that(tercerSalidaTrekking.implicaEsfuerzo())
+    assert.that(tercerSalidaTrekking.sirveParaBroncearse())
+    assert.equals(5, tercerSalidaTrekking.diasLleva())
+  }
+
+  test "tercerViajeCiudad lleva 2 dias, no implica esfuerzo y no sirve para broncearse es interesante porque tiene 5 atraaciones" {
+    assert.that(tercerViajeCiudad.esInteresante())
+  }
+
+  test "cuartaSalidaTrekking es interesante porque tiene 150 dias al sol y 3 idiomas" {
+    assert.that(cuartaSalidaTrekking.esInteresante())
+  }
+  // test SOCIOS  
+}
